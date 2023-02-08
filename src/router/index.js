@@ -19,12 +19,20 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue')
   },
   {
-    path: '/guide',
-    name: 'guide',
+    path: '/charts-line',
+    name: 'charts-line',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '@/views/guide')
+    component: () => import(/* webpackChunkName: "about" */ '@/views/charts/line.vue'),
+    // children:[
+    //   {
+    //     path:'/line',
+    //     name:'line',
+    //     component:()=> import ( '@/views/charts/line.vue')
+    //   }
+
+    // ]
   },
   {
     path: '/404',
@@ -32,7 +40,8 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '@/views/404/index.vue')
+    component: () => import(/* webpackChunkName: "about" */ '@/views/404/index.vue'),
+    
   },
   { path: '*', redirect: '/404', hidden: true }
 ]
