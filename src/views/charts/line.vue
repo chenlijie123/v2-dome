@@ -1,14 +1,16 @@
 <template>
+
   <div class="chart-container">
+    <router-view></router-view>
     <el-row :gutter="12">
       <el-col :lg="8" :xs="24"  :sm="24">
-        <ChartsLine height="400px"></ChartsLine>
+        <ChartsLine id="echart1" height="400px"></ChartsLine>
       </el-col>
       <el-col :lg="8" :xs="24"  :sm="24">
-        <ChartsLine height="400px"></ChartsLine>
+        <ChartsLine id="echart2" height="400px"></ChartsLine>
       </el-col>
       <el-col  :lg="8" :xs="24"  :sm="24">
-        <ChartsLine height="400px"></ChartsLine>
+        <ChartsLine id="echart3" height="400px"></ChartsLine>
       </el-col>
     </el-row>
     
