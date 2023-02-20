@@ -30,6 +30,11 @@ const routes = [
     component: Layout
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/login')
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
