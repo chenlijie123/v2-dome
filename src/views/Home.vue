@@ -1,13 +1,16 @@
 <template>
   <div class="home">
-    <div @click="goabout">home</div>
-
-    <div>
+    <div class="flex">
       <el-button type="primary" @click="decrement">count--</el-button>
-    <div>{{ count }}</div>
-    <div>{{ num}}</div>
+      <div>{{count }}</div>
+      <div>{{ num }}</div>
       <el-button type="primary" @click="increment">count++</el-button>
+
+
+      
     </div>
+      <div>{{ 'counts:' +  counts }}</div>
+      <div>{{ 'nums:' + nums }}</div>
 
     <!-- <transition>
       <button v-if="isEditing" v-on:click="isEditing = false" key="save">Save</button>
@@ -22,36 +25,47 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-import { mapState ,mapGetters} from 'vuex'
+import { mapState, mapMutations ,mapGetters,mapActions} from 'vuex'
 export default {
   name: 'Home',
   components: {
-    // HelloWorld
   },
   data() {
     return {
       isEditing: true
     }
   },
-  created() {
-    console.log(this.$route)
-  },
-   computed:{
-    ...mapState(['count']),
-    ...mapGetters(['num'])
+   
+  computed: {
+    // 获取state
+   ...mapState({
+      count : state => state.app.count,
+      num :state => state.num
+   }),
+   // 数据处理state
+   ...mapGetters(['counts','nums'])
   },
   methods: {
-    goabout() {
-      this.$router.push('/about')
-    },
+    // 修改satte
+    ...mapMutations(['INCREMENT','DECREMENT']),
+
+    //
+    ...mapActions(['syncAdd','asynclogin']),
+
     increment() {
-      this.$store.commit('increment')
+      // this.INCREMENT(2)
+      this.$store.dispatch('app/asynclogin',555555555).then(res=>{
+            console.log(res);
+      }).catch(err=>{err})
     },
     decrement() {
-      this.$store.commit('decrement')
-    }
-  },
-  
+      // this.DECREMENT(1)
+      this.$store.dispatch('syncAdd',2222222).then(res=>{
+        console.log(res);
+      }).catch(err=>{err})
+    },
+
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -66,5 +80,13 @@ export default {
 }
 .v-leave-active {
   position: absolute;
+}
+.flex {
+  margin: 30px auto;
+  width: 300px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>

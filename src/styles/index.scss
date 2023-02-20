@@ -1,9 +1,10 @@
-// @import './variables.scss';
-// @import './mixin.scss';
+@import './variables.scss';
+@import './mixin.scss';
 // @import './transition.scss';
-// @import './element-ui.scss';
-// @import './sidebar.scss';
-// @import './btn.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
+@import './btn.scss';
+@import './common.scss';
 
 body {
   // height: 100%;
@@ -106,7 +107,7 @@ div:focus {
 aside {
   background: #eef1f6;
   padding: 8px 24px;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
   border-radius: 2px;
   display: block;
   line-height: 32px;

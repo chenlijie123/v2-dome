@@ -5,6 +5,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import Layout from '@/layout'
 
 // 1. 定义路由组件.
 // 也可以从其他文件导入
@@ -22,6 +23,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/layout',
+    name: 'Layout',
+    component: Layout
   },
   {
     path: '/about',
