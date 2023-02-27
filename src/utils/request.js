@@ -23,7 +23,7 @@ const confirmMessage = debounce(1000, (message) => {
 })
 
 const service = axios.create({
-  baseURL: 'http://crm-gateway.test.hxss.com.cn', // baseurl + requestUrl
+  baseURL: 'http://crm-gateway.dev.hxss.com.cn', // baseurl + requestUrl
   timeout: 60000 // 请求超时时间
 })
 
@@ -31,8 +31,11 @@ const service = axios.create({
 // 添加请求拦截器
 service.interceptors.request.use(
   config => {
-    Lockr.set('Admin-Token','4edc16dc898f408e993aeb7e8ed3201b')
-    config.headers['Admin-Token'] = '4edc16dc898f408e993aeb7e8ed3201b'
+    if(store.getters.counts) {
+      let token = Lockr.get('Admin-Token')
+      config.headers['Admin-Token'] = token
+    }
+  
     for (const key in config.data) {
       const val = config.data[key]
       if (val === undefined || val == null) {
@@ -54,29 +57,35 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => {
       const res = response.data
-      if(res.code !== 200 && res.code !== 0){
-        // 302 登陆失效
-        if( res.code == 302 && res.data && res.data.extra == 1) {
-          confirmMessage(`您的账号${res.data.extraTime}在别处登录。如非本人操作，则密码可能已泄漏，建议修改密码`)
-          store.dispatch('resetToken').then(() => {
-            location.reload()
-          })
-        }else {
-          errorMessage('登录超时，请重新登录')
+      console.log('response',res);
+      if (res.code !== 0 && res.code !== 200) {
+        // 302	登录已失效
+        if (res.code === 302) {
+          if (res.data && res.data.extra === 1) {
+            confirmMessage(`您的账号${res.data.extraTime}在别处登录。如非本人操作，则密码可能已泄漏，建议修改密码`)
+          } else {
+            errorMessage('登录超时，请重新登录')
+            // clearCacheEnterLogin()
+          }
+        } else if (res.code === 503) { // 系统维护中
+          // router.replace('/systemMaintenance')
+        } else {
+          if (res.message || res.msg) {
+            errorMessage(res.message || res.msg || '系统处理失败')
+          }
         }
-
-
-      }else {
+        return Promise.reject(res)
+      } else {
         return res
       }
     },
     error => {
       console.log('err' + error) // for debug
-      Message({
-        message: error.message,
-        type: 'error',
-        duration: 5 * 1000
-      })
+      // Message({
+      //   message: error.message,
+      //   type: 'error',
+      //   duration: 5 * 1000
+      // })
       return Promise.reject(error)
     }
 )

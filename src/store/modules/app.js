@@ -1,3 +1,4 @@
+
 const app = {
   namespaced: true,
   state: {
@@ -30,11 +31,11 @@ const app = {
       })
     },
 
-    syncAdd ({ commit }) {
-      commit('DECREMENT', 3)
-      // return {payload:
-      //   reject(commit)
-      // }) 
+    syncAdd ({ commit },paylod) {
+      return new Promise((resolve, reject) => {
+        resolve(paylod)
+        reject(commit)
+      })
     },
     asynclogin ({ commit }, paylod) {
       return new Promise((resolve, reject) => {

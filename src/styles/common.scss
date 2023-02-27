@@ -6,7 +6,7 @@ $white: white;
 // font-size: 8-30px
 @for $i from 8 through 50 {
   .font-#{$i} { font-size: 1px * $i; }
-  .font-#{$i}-rem { font-size: (1rem * $i) / 16; }
+  // .font-#{$i}-rem { font-size: (1rem * $i) / 16; }
 }
 
 // margin/padding:8-40px
@@ -23,16 +23,16 @@ $i: 40;
   .p-l-#{$i} { padding-left: 1px * $i; }
   .p-r-#{$i} { padding-right: 1px * $i; }
 
-  .m-#{$i}-rem { margin: (1rem * $i) / 16; }
-  .m-t-#{$i}-rem { margin-top: (1rem * $i) / 16; }
-  .m-b-#{$i}-rem { margin-bottom: (1rem * $i) / 16; }
-  .m-l-#{$i}-rem { margin-left: (1rem * $i) / 16; }
-  .m-r-#{$i}-rem { margin-right: (1rem * $i) / 16; }
-  .p-#{$i}-rem { padding: (1rem * $i) / 16; }
-  .p-t-#{$i}-rem { padding-top: (1rem * $i) / 16; }
-  .p-b-#{$i}-rem { padding-bottom: (1rem * $i) / 16; }
-  .p-l-#{$i}-rem { padding-left: (1rem * $i) / 16; }
-  .p-r-#{$i}-rem { padding-right: (1rem * $i) / 16; }
+  // .m-#{$i}-rem { margin: (1rem * $i) / 16; }
+  // .m-t-#{$i}-rem { margin-top: (1rem * $i) / 16; }
+  // .m-b-#{$i}-rem { margin-bottom: (1rem * $i) / 16; }
+  // .m-l-#{$i}-rem { margin-left: (1rem * $i) / 16; }
+  // .m-r-#{$i}-rem { margin-right: (1rem * $i) / 16; }
+  // .p-#{$i}-rem { padding: (1rem * $i) / 16; }
+  // .p-t-#{$i}-rem { padding-top: (1rem * $i) / 16; }
+  // .p-b-#{$i}-rem { padding-bottom: (1rem * $i) / 16; }
+  // .p-l-#{$i}-rem { padding-left: (1rem * $i) / 16; }
+  // .p-r-#{$i}-rem { padding-right: (1rem * $i) / 16; }
   $i: $i - 2;
 }
 

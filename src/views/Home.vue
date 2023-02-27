@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     <div class="flex">
-      <el-button type="primary" @click="decrement">count--</el-button>
+      <el-button type="primary" @click="decrement">decrement--</el-button>
       <div>{{count }}</div>
       <div>{{ num }}</div>
-      <el-button type="primary" @click="increment">count++</el-button>
+      <el-button type="primary" @click="increment">increment++</el-button>
 
 
       
@@ -55,12 +55,12 @@ export default {
     increment() {
       // this.INCREMENT(2)
       this.$store.dispatch('app/asynclogin',555555555).then(res=>{
-            console.log(res);
+          console.log(res);
       }).catch(err=>{err})
     },
     decrement() {
       // this.DECREMENT(1)
-      this.$store.dispatch('syncAdd',2222222).then(res=>{
+      this.$store.dispatch('app/syncAdd',2222222).then(res=>{
         console.log(res);
       }).catch(err=>{err})
     },
