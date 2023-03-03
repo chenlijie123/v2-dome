@@ -1,7 +1,12 @@
-const getter = {
-  nums : state => state.num *2,
-  counts : state => state.app.count *2,
-  token: state => state.user.token,
+const getters = {
+  nums : state => state.num,
+  counts : state => state.app.count,
+  // user
+  token : state => state.user.token,
+  userInfo : state => state.user.userInfo,
+  allAuth : state => state.user.allAuth,
+  crm : state => state.user.crm,
+  addRouters : state => state.permission.addRouters,
 }
 
-export default getter
+export default getters

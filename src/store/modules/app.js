@@ -2,8 +2,6 @@
 const app = {
   namespaced: true,
   state: {
-    token: '',
-    roles: '',
     count: 2
   },
   mutations: {
@@ -22,27 +20,27 @@ const app = {
   },
   actions: {
     // remove token
-    resetToken ({ commit }) {
-      return new Promise(resolve => {
-        commit('SET_TOKEN', '')
-        commit('SET_ROLES', [])
-        // removeToken()
-        resolve()
-      })
-    },
+    // resetToken ({ commit }) {
+    //   return new Promise(resolve => {
+    //     commit('SET_TOKEN', '')
+    //     commit('SET_ROLES', [])
+    //     // removeToken()
+    //     resolve()
+    //   })
+    // },
 
-    syncAdd ({ commit },paylod) {
-      return new Promise((resolve, reject) => {
-        resolve(paylod)
-        reject(commit)
-      })
-    },
-    asynclogin ({ commit }, paylod) {
-      return new Promise((resolve, reject) => {
-        resolve(paylod)
-        reject(commit)
-      })
-    }
+    // syncAdd ({ commit },paylod) {
+    //   return new Promise((resolve, reject) => {
+    //     resolve(paylod)
+    //     reject(commit)
+    //   })
+    // },
+    // asynclogin ({ commit }, paylod) {
+    //   return new Promise((resolve, reject) => {
+    //     resolve(paylod)
+    //     reject(commit)
+    //   })
+    // }
   },
 }
 export default app
