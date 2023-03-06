@@ -26,7 +26,7 @@ export const constantRoutes = [
   {
     path: '/',
     // name: 'login',
-    redirect: '/home',
+    redirect: '/task',
     // component: () => import('@/views/login')
   },
   {

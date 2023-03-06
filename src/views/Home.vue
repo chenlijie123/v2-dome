@@ -35,7 +35,9 @@ export default {
       isEditing: true
     }
   },
-   
+   created(){
+    console.log('router',this.$router);
+   },
   computed: {
     // 获取state
    ...mapState({

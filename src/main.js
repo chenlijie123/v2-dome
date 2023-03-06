@@ -4,7 +4,27 @@ import router from './router'
 import store from './store'
 
 import ElementUI from 'element-ui';
+
+Vue.use(ElementUI);
+
+import { Message } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
+
+Vue.prototype.$message.success = function(msg) {
+  return Message({
+    message: msg,
+    duration: 1500,
+    type: 'success'
+  })
+}
+
+Vue.prototype.$message.error = function(msg) {
+  return Message({
+    message: msg,
+    duration: 1500,
+    type: 'error'
+  })
+}
 
 import '@/styles/index.scss' // global css
 
@@ -19,8 +39,6 @@ Vue.use(VueElementUISkeleton, {
   bg: '#f0f2f5',
   animated:true
 });
-
-Vue.use(ElementUI);
 
 Vue.config.productionTip = false
 

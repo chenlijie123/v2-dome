@@ -50,7 +50,10 @@ const filterRouter = function (routers,auth) {
     }
 
   });
-
+// res.push({
+//   path:'/',
+//   redirect:'/task'
+// })
   return res  // 返回权限匹配成功的route
 }
 

@@ -17,6 +17,7 @@ const components = [
           permissions: ['crm', 'leads', 'assigned']
         }
   }
+  
 ]
 
 export default components
