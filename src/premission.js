@@ -2,7 +2,7 @@
  * @Author: chenlijie chen.lijie@hxss.com.cn
  * @Date: 2023-03-01 14:26:01
  * @LastEditors: chenlijie chen.lijie@hxss.com.cn
- * @LastEditTime: 2023-03-06 15:20:31
+ * @LastEditTime: 2023-03-06 16:15:46
  * @FilePath: \v2-dome\src\premission.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -13,7 +13,7 @@ import store from "./store";
 // import * as lockr from 'lockr'
 import { getToken } from "./utils/auth";
 let loadAsyncRouter = false
-const whiteList = ['/login','/note']  // no redirect whiteList
+const whiteList = ['/login']  // no redirect whiteList
 
 // nProgress.start()
 
@@ -36,7 +36,6 @@ router.beforeEach((to, from, next) => {
         } else {
           store.dispatch('user/getAllAuth')  // 菜单权限
             .then(auth => {
-              console.log('1111111111');
               loadAsyncRouter = true
               // 根据权限生成路由表
               store.dispatch('permission/generateRouters', auth).then((res) => {

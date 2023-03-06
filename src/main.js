@@ -16,7 +16,8 @@ Vue.use(VueElementUISkeleton, {
   directiveName: 'skeleton',
   rows: 10,
   radius: 3,
-  bg: '#f0f2f5'
+  bg: '#f0f2f5',
+  animated:true
 });
 
 Vue.use(ElementUI);
