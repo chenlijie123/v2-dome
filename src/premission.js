@@ -2,7 +2,7 @@
  * @Author: chenlijie chen.lijie@hxss.com.cn
  * @Date: 2023-03-01 14:26:01
  * @LastEditors: chenlijie chen.lijie@hxss.com.cn
- * @LastEditTime: 2023-03-03 11:17:12
+ * @LastEditTime: 2023-03-06 15:20:31
  * @FilePath: \v2-dome\src\premission.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -40,7 +40,9 @@ router.beforeEach((to, from, next) => {
               loadAsyncRouter = true
               // 根据权限生成路由表
               store.dispatch('permission/generateRouters', auth).then((res) => {
-                console.log('addrouters',res);
+                console.log('generateRouters',res);
+                router.addRoute(...res)
+                // console.log('addrouters',addRouters);
               })
 
             })

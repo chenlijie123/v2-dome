@@ -81,7 +81,7 @@ const permission = {
         perfectRoute(auth, (routers) => {
           console.log('000000routers',routers);
           commit('SET_ROUTERS', routers)
-          resolve()
+          resolve(routers)
           // reject()
         })
       })

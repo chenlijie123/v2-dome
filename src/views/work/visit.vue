@@ -1,20 +1,58 @@
 <template>
-  <div class="work">
-    {{'work'}}
-  </div>
+  <el-table
+     v-skeleton="{loading: loading, rows: 10,animated:true,throttle:3000 }"
+    :data="tableData"
+    style="width: 100%"
+  >
+    <el-table-column
+      prop="date"
+      label="日期"
+      width="180"
+    />
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="180"
+    />
+    <el-table-column
+      prop="address"
+      label="地址"
+    />
+  </el-table>
 </template>
 
 <script>
-export default {
-  components: {},
-  data () {
-    return {
-
-    }
-  },
-  methods: {},
-  created () {}
-}
+    export default {
+        data() {
+            return {
+                loading: false,
+                tableData: []
+            };
+        },
+        mounted() {
+            // 模拟请求耗时2s
+            let that = this;
+            that.loading = true;
+            setTimeout(function () {
+                that.loading = false;
+                that.tableData = [{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1517 弄'
+                }, {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1519 弄'
+                }, {
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1516 弄'
+                }];
+            }, 2000);
+        }
+    };
 </script>
-<style lang="scss" scoped>
-</style>
