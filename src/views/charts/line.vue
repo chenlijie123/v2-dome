@@ -3,15 +3,15 @@
   <div class="chart-container">
     <router-view></router-view>
     <el-row :gutter="12">
-      <el-col :lg="8" :xs="24"  :sm="24">
+      <el-col :span="24">
         <ChartsLine id="echart1" height="400px"></ChartsLine>
       </el-col>
-      <el-col :lg="8" :xs="24"  :sm="24">
+      <!-- <el-col :lg="8" :xs="24"  :sm="24">
         <ChartsLine id="echart2" height="400px"></ChartsLine>
       </el-col>
       <el-col  :lg="8" :xs="24"  :sm="24">
         <ChartsLine id="echart3" height="400px"></ChartsLine>
-      </el-col>
+      </el-col> -->
     </el-row>
     
     <!-- <ChartsLine height="50%" width="50%"></ChartsLine> -->
