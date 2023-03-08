@@ -1,6 +1,10 @@
 
 import { Login , userInfo,getAllAuth} from '@/api/login'
-import* as lockr from 'lockr'
+import { removeToken } from '@/utils/auth'
+import {
+  resetRouter
+} from '@/router'
+import * as lockr from 'lockr'
 const user = {
   namespaced: true,
   state: {
@@ -18,6 +22,7 @@ const user = {
 
     //set userinfo
     SET_USERINFO: (state,userInfo) => {
+      console.log('userinfo',userInfo);
       state.userInfo = userInfo
       lockr.set('userInfo',userInfo)
     },
@@ -25,6 +30,7 @@ const user = {
     // set allAuth
     SET_ALLAUTH(state,allAuth){
       state.allAuth = allAuth
+      lockr.set('allAuth',allAuth)
     },
     
     // set crm
@@ -86,7 +92,20 @@ const user = {
         })
        
       })
+    },
+
+    resetToken({commit}){
+      return new Promise((resolve) => {
+        commit('SET_TOKEN','')
+        // lockr.rm('Admin-Token')
+        commit('SET_ALLAUTH',null)
+        commit('SET_USERINFO',null)
+        removeToken()
+        resetRouter()
+        resolve()
+      })
     }
+
 
   },
 }

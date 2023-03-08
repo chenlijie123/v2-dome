@@ -1,29 +1,42 @@
 <template>
-<div>
-  <router-view></router-view>
-  <div class="tmp">
-    {{'note1'}}
-  </div>
-</div>
-
+  <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
+    <li v-for="i in count" :key="i" class="infinite-list-item">{{ i }}</li>
+  </ul>
 </template>
 
 <script>
 export default {
-  components: {},
-  data () {
+  data(){
     return {
-
+      count:4
     }
   },
-  methods: {},
-  created () {}
+  methods: {
+    load(){
+      this.count += 4
+    }
+  },
 }
 </script>
-<style lang="scss" scoped>
-  .tmp {
-    width: 200px;
-    height: 200px;
-    background-color: aquamarine;
-  }
+ 
+
+<style>
+.infinite-list {
+  height: 300px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.infinite-list .infinite-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  background: var(--el-color-primary-light-9);
+  margin: 10px;
+  color: var(--el-color-primary);
+}
+.infinite-list .infinite-list-item + .list-item {
+  margin-top: 10px;
+}
 </style>
