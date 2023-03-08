@@ -1,6 +1,6 @@
 <template>
   <el-scrollbar wrap-class="scrollbar-wrapper">
-      <el-menu
+      <!-- <el-menu
         :default-active="activeMenu"
         :collapse="isCollapse"
         :background-color="variables.menuBg"
@@ -9,10 +9,10 @@
         :active-text-color="variables.menuActiveText"
         :collapse-transition="false"
         mode="vertical"
-      >
-      <div v-for="i in 40" :key="i">{{ i + 11111111111111111111111111 }}</div>
+      > -->
+      <div v-for="i in 60" :key="i">{{ i + 11111111111111111111111111 }}</div>
         <!-- <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" /> -->
-      </el-menu>
+      <!-- </el-menu> -->
     </el-scrollbar>
 </template>
 

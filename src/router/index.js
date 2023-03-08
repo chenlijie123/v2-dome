@@ -106,7 +106,17 @@ export function resetRouter() {
   router.matcher = newRouter.matcher // reset router
 }
 
- 
+// 解决Vue-Router升级导致的Uncaught(in promise) navigation guard问题
+
+// 方案一
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push (location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+  return originalPush.call(this, location).catch(err => err)
+}
+
+//方案二
+// 删除 node_modules ，到 package.json 中将 vue-router 改为 3.0.7 ，重新 npm i (未测试)
  
 
 // 4.暴露router实例
