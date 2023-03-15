@@ -42,7 +42,7 @@ export default {
       chartHandler(xdata, data) {
           var myChart = echarts.init(document.getElementById(this.id), 'macarons')
           var colorData = ['#08C5B8', '#4AF1DB', '#24DCF7']
-          let numData = parseInt(Math.max.apply(null, data)) + parseInt(Math.max.apply(null, data)) * 0.25
+        //   let numData = parseInt(Math.max.apply(null, data)) + parseInt(Math.max.apply(null, data)) * 0.25
           // 绘制左侧面
           const CubeLeft = echarts.graphic.extendShape({
               shape: {
@@ -96,7 +96,7 @@ export default {
           echarts.graphic.registerShape('CubeRight', CubeRight)
           echarts.graphic.registerShape('CubeTop', CubeTop)
 
-          const MAX = [numData, numData, numData, numData]
+        //   const MAX = [numData, numData, numData, numData]
           const VALUE = data
           const option = {
               tooltip: {
@@ -185,7 +185,8 @@ export default {
                       opacity: "0.7",
                   }
               },
-              series: [{
+              series: [
+                {
                   type: 'custom',
                   renderItem: function(params, api) {
                       const location = api.coord([api.value(0), api.value(1)])
@@ -200,7 +201,8 @@ export default {
                                   xAxisPoint: api.coord([api.value(0), 0])
                               },
                               style: {
-                                  fill: 'rgba(47,102,192,.27)'
+                                //   fill: 'rgba(47,102,192,.27)'
+                                fill:'red'
                               }
                           }, {
                               type: 'CubeRight',
@@ -211,7 +213,7 @@ export default {
                                   xAxisPoint: api.coord([api.value(0), 0])
                               },
                               style: {
-                                  fill: 'rgba(59,128,226,.27)'
+                                  fill: 'yellow'
                               }
                           }, {
                               type: 'CubeTop',
@@ -222,13 +224,14 @@ export default {
                                   xAxisPoint: api.coord([api.value(0), 0])
                               },
                               style: {
-                                  fill: 'rgba(72,156,221,.27)'
+                                  fill: 'green'
                               }
                           }]
                       }
                   },
-                  data: MAX
-              }, {
+                //   data: MAX
+              }, 
+              {
                   type: 'custom',
                   renderItem: (params, api) => {
                       const location = api.coord([api.value(0), api.value(1)])
@@ -271,7 +274,8 @@ export default {
                       }
                   },
                   data: VALUE
-              }, {
+              },
+               {
                   type: 'bar',
                   label: {
                       normal: {
