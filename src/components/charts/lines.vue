@@ -278,7 +278,7 @@ export default {
                {
                   type: 'bar',
                   label: {
-                      normal: {
+                    //   normal: {
                           show: true,
                           position: 'top',
                           fontFamily: "DIN Alternate",
@@ -286,7 +286,7 @@ export default {
                           color: colorData[2],
                           fontWeight: "bold",
                           offset: [2, -25]
-                      }
+                    //   }
                   },
                   itemStyle: {
                       color: 'transparent'

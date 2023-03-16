@@ -1,15 +1,6 @@
-/*
- * @Author: chenlijie chen.lijie@hxss.com.cn
- * @Date: 2023-03-02 13:28:23
- * @LastEditors: chenlijie chen.lijie@hxss.com.cn
- * @LastEditTime: 2023-03-15 16:05:12
- * @FilePath: \v2-dome\src\store\modules\permission.js
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 
 import {constantRoutes,  asyncRouters} from '@/router' //constantRoutes
 const forCheckPermission = function(permission,auth){
-  console.log('permission',permission);
   for( let i =0 ; i< permission.length;i++){
     const key= permission[i]
     auth = auth[key]
@@ -57,15 +48,15 @@ const filterRouter = function (routers,auth) {
     }
 
   });
-  // res.push({
-  //   path:'/',
-  //   redirect:'/task'
-  // })
+  res.push( {
+    path: '/',
+    hidden: true,
+    redirect: '/task',
+  })
   return res  // 返回权限匹配成功的route
 }
 
 const perfectRoute = function (auth, result) {
-  console.log('asyncRouters',asyncRouters);
   let accessedRoutes = filterRouter(asyncRouters,auth) // 成功匹配权限的路由
   if(result) {
     result (accessedRoutes) 
@@ -82,7 +73,7 @@ const permission = {
   mutations: {
     SET_ROUTERS:(state,data)=>{
       state.addRouters =  data
-      state.routers = constantRoutes //.concat(data)
+      state.routers = constantRoutes.concat(data)
     }
 
   },
@@ -91,7 +82,6 @@ const permission = {
     generateRouters ({ commit }, auth) {
       return new Promise(resolve => {
         perfectRoute(auth, (routers) => {
-          console.log('000000routers',routers);
           commit('SET_ROUTERS', routers)
           resolve(routers)
           // reject()

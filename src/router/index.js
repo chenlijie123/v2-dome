@@ -5,8 +5,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-// import charts from './modules/charts'
-import components from './modules/components'
+import charts from './modules/charts'
+// import components from './modules/components'
 
 
 import Layout from '@/layout'
@@ -34,11 +34,6 @@ const layout = function (meta = {}, path = '') {
 }
 export const constantRoutes = [
   {
-    path: '/',
-    hidden: true,
-    redirect: '/task',
-  },
-  {
     ...layout(
       {
         meta: {
@@ -48,28 +43,38 @@ export const constantRoutes = [
         }
       },
       '/task',
-    ),
-    component: () => import('@/views/work/visit'),
-    hidden:true
+      ),
+      naem:'测试一',
+    redirect: '/task/home',
+    component: Layout,
+    children: [
+      {
+        path: 'work',
+        component: () => import('@/views/work/visit.vue'),
+        name: 'visit',
+        meta: {
+          title: 'visit',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'home',
+        component: () => import('@/views/Home.vue'),
+        name: 'home',
+        meta: {
+          title: 'home',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      }
+    ]
+    // hidden:true
   },
-  // {
-  //   path: '/documentation',
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: 'lines',
-  //       component: () => import('@/views/charts/lines.vue'),
-  //       name: 'Documentation',
-  //       meta: { title: 'documentation', icon: 'documentation', affix: true }
-  //     }
-  //   ]
-  // },
   {
     path: '/permission',
     component: Layout,
     redirect: '/permission/page',
     alwaysShow: true, // will always show the root menu
-    name: 'Permission',
+    name: '测试二',
     meta: {
       title: 'permission',
       icon: 'lock',
@@ -105,51 +110,12 @@ export const constantRoutes = [
       }
     ]
   },
-  // {
-  //   path: '/lines',
-  //   name: 'lines',
-  //   component: () => import(/* webpackChunkName: "about" */ '@/views/charts/lines.vue')
-  // },
-  // {
-  //   path: '/line',
-  //   name: 'line',
-  //   component: () => import(/* webpackChunkName: "about" */ '@/views/charts/line.vue')
-  // },
-  // {
-  //   path: '/layout',
-  //   name: 'Layout',
-  //   hidden:true,
-  //   component: Layout
-  // },
-  // {
-  //   path: '/home',
-  //   name: 'home',
-  //   component: Home
-  // },
   {
     path: '/login',
     name: 'Login',
     hidden: true,
     component: () => import('@/views/login')
   },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue')
-  // },
-  // {
-  //   path:'/note',
-  //   name:'note',
-  //   component: () => import('@/views/note/note1'),
-  //   children:[
-  //     {
-  //       path:'note1',
-  //       name:'note1',
-  //       component:note
-  //     }
-  //   ]
-  // },
-   
   {
     path: '/404',
     hidden: true,
@@ -159,8 +125,8 @@ export const constantRoutes = [
 ]
 
 export const asyncRouters = [
-  ...components,
-  // ...charts
+  // ...components,
+  ...charts
 ]
 
 // 3.创建路由实例并出传递routers配置

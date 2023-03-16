@@ -2,7 +2,7 @@
  * @Author: chenlijie chen.lijie@hxss.com.cn
  * @Date: 2023-03-01 14:26:01
  * @LastEditors: chenlijie chen.lijie@hxss.com.cn
- * @LastEditTime: 2023-03-07 11:04:26
+ * @LastEditTime: 2023-03-16 13:33:45
  * @FilePath: \v2-dome\src\premission.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -17,7 +17,6 @@ let loadAsyncRouter = false
 const whiteList = ['/login']  // no redirect whiteList
 
 router.beforeEach((to, from, next) => {
-  console.log(from,to);
   nProgress.start()
   if (getToken()) {
     if (to.path === '/login') {
@@ -35,7 +34,7 @@ router.beforeEach((to, from, next) => {
             }
             if (to.path === '/404') {
               next({
-                path: '/',
+                path: '/login',
                 replace: true
               })
             } else {
@@ -62,7 +61,7 @@ router.beforeEach((to, from, next) => {
 
                 if (to.path === '/404') {
                   next({
-                    path: to.redirectedFrom || '/',
+                    path: to.redirectedFrom || '/login',
                     replace: true
                   })
                 } else {
