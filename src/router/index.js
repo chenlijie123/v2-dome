@@ -13,8 +13,8 @@ import Layout from '@/layout'
 
 // 1. 定义路由组件.
 // 也可以从其他文件导入
-import Home from '../views/Home.vue'
-import note from '@/views/note/note1'
+// import Home from '../views/Home.vue'
+// import note from '@/views/note/note1'
 // 应用路有插件
 Vue.use(VueRouter)
 
@@ -22,74 +22,138 @@ Vue.use(VueRouter)
 // 2. 定义一些路由
 // 每个路由都需要映射到一个组件。
 // 我们后面再讨论嵌套路由。
+const layout = function (meta = {}, path = '') {
+  return {
+    path: path,
+    // component: Layout,
+    meta: {
+      requiresAuth: true,
+      ...meta
+    }
+  }
+}
 export const constantRoutes = [
   {
     path: '/',
-    // name: 'login',
+    hidden: true,
     redirect: '/task',
-    // component: () => import('@/views/login')
   },
   {
-    path: '/lines',
-    name: 'lines',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '@/views/charts/lines.vue')
-  },
-  {
-    path: '/line',
-    name: 'line',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '@/views/charts/line.vue')
-  },
-  {
-    path: '/layout',
-    name: 'Layout',
-    component: Layout
-  },
-  {
-    path: '/home',
-    name: 'home',
-    component: Home
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/login')
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue')
-  },
-  {
-    path:'/note',
-    name:'note',
-    component: () => import('@/views/note/note1'),
-    children:[
+    ...layout(
       {
-        path:'note1',
-        name:'note1',
-        component:note
-        // component:() => import('@/views/note/note1.vue')
+        meta: {
+          title: '工作台',
+          // requiresAuth: true,
+          permissionList: ['crm', 'leads', 'assigned']
+        }
+      },
+      '/task',
+    ),
+    component: () => import('@/views/work/visit'),
+    hidden:true
+  },
+  // {
+  //   path: '/documentation',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'lines',
+  //       component: () => import('@/views/charts/lines.vue'),
+  //       name: 'Documentation',
+  //       meta: { title: 'documentation', icon: 'documentation', affix: true }
+  //     }
+  //   ]
+  // },
+  {
+    path: '/permission',
+    component: Layout,
+    redirect: '/permission/page',
+    alwaysShow: true, // will always show the root menu
+    name: 'Permission',
+    meta: {
+      title: 'permission',
+      icon: 'lock',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'page',
+        component: () => import('@/views/charts/lines.vue'),
+        name: 'PagePermission',
+        meta: {
+          title: 'pagePermission',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'directive',
+        component: () => import('@/views/charts/line.vue'),
+        name: 'DirectivePermission',
+        meta: {
+          title: 'directivePermission'
+          // if do not set roles, means: this page does not require permission
+        }
+      },
+      {
+        path: 'role',
+        component: () => import('@/views/login'),
+        name: 'RolePermission',
+        meta: {
+          title: 'rolePermission',
+          roles: ['admin']
+        }
       }
     ]
   },
+  // {
+  //   path: '/lines',
+  //   name: 'lines',
+  //   component: () => import(/* webpackChunkName: "about" */ '@/views/charts/lines.vue')
+  // },
+  // {
+  //   path: '/line',
+  //   name: 'line',
+  //   component: () => import(/* webpackChunkName: "about" */ '@/views/charts/line.vue')
+  // },
+  // {
+  //   path: '/layout',
+  //   name: 'Layout',
+  //   hidden:true,
+  //   component: Layout
+  // },
+  // {
+  //   path: '/home',
+  //   name: 'home',
+  //   component: Home
+  // },
+  {
+    path: '/login',
+    name: 'Login',
+    hidden: true,
+    component: () => import('@/views/login')
+  },
+  // {
+  //   path: '/about',
+  //   name: 'About',
+  //   component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue')
+  // },
+  // {
+  //   path:'/note',
+  //   name:'note',
+  //   component: () => import('@/views/note/note1'),
+  //   children:[
+  //     {
+  //       path:'note1',
+  //       name:'note1',
+  //       component:note
+  //     }
+  //   ]
+  // },
    
   {
     path: '/404',
-    name: '404',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    hidden: true,
     component: () => import(/* webpackChunkName: "about" */ '@/views/404/index.vue'),
-    
   },
   { path: '*', redirect: '/404', hidden: true }
 ]

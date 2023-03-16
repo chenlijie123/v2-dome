@@ -2,13 +2,12 @@
  * @Author: chenlijie chen.lijie@hxss.com.cn
  * @Date: 2023-03-02 13:28:23
  * @LastEditors: chenlijie chen.lijie@hxss.com.cn
- * @LastEditTime: 2023-03-08 13:28:00
+ * @LastEditTime: 2023-03-15 16:05:12
  * @FilePath: \v2-dome\src\store\modules\permission.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 
-import {  asyncRouters} from '@/router'
-//  constantRoutes
+import {constantRoutes,  asyncRouters} from '@/router' //constantRoutes
 const forCheckPermission = function(permission,auth){
   console.log('permission',permission);
   for( let i =0 ; i< permission.length;i++){
@@ -58,10 +57,10 @@ const filterRouter = function (routers,auth) {
     }
 
   });
-  res.push({
-    path:'/',
-    redirect:'/task'
-  })
+  // res.push({
+  //   path:'/',
+  //   redirect:'/task'
+  // })
   return res  // 返回权限匹配成功的route
 }
 
@@ -77,11 +76,13 @@ const perfectRoute = function (auth, result) {
 const permission = {
   namespaced: true,
   state: {
-    addRouters: []
+    addRouters: [],
+    routers:[]
   },
   mutations: {
     SET_ROUTERS:(state,data)=>{
       state.addRouters =  data
+      state.routers = constantRoutes //.concat(data)
     }
 
   },

@@ -1,6 +1,6 @@
 <template>
-  <div class="">navbar
-    
+  <div class="">
+    {{'navbar'}}
   </div>
 </template>
 

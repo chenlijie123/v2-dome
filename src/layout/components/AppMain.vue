@@ -1,39 +1,58 @@
 <template>
-  <div class="">
-    <el-button type="primary" @click="getList">appmain</el-button>
-  </div>
+  <section class="app-main">
+    {{ 'main'}}
+    <!-- <transition name="fade-transform" mode="out-in">
+      <keep-alive :include="cachedViews"> -->
+        <!-- <router-view :key="key" /> -->
+      <!-- </keep-alive>
+    </transition> -->
+  </section>
 </template>
 
 <script>
-import { list } from '@/api/test'
-//  import * as Lockr from 'lockr'
 export default {
-  components: {},
-  data () {
-    return {
-
+  name: 'AppMain',
+  computed: {
+    // cachedViews() {
+    //   return this.$store.state.tagsView.cachedViews
+    // },
+    key() {
+      return this.$route.path
     }
-  },
-  methods: {
-
-    getList() {
-      // const info = ['13xx', 188, null, undefined, false, [123, 22, '44']]
-      // Lockr.set('infoName',info)
-      // console.log('Lockr',Lockr);
-      let data = {
-        pageNum:1,
-        pageSize:15,
-        projectState:0
-      }
-      list(data).then(res=>{
-
-      if (res.code === 200  ) console.log('res',res);
-
-      })
-    }
-
-  },
-  created () {}
+  }
 }
 </script>
-<style lang="scss" scoped></style>
+
+<style lang="scss" scoped>
+.app-main {
+  /* 50= navbar  50  */
+  min-height: calc(100vh - 50px);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.fixed-header+.app-main {
+  padding-top: 50px;
+}
+
+.hasTagsView {
+  .app-main {
+    /* 84 = navbar + tags-view = 50 + 34 */
+    min-height: calc(100vh - 84px);
+  }
+
+  .fixed-header+.app-main {
+    padding-top: 84px;
+  }
+}
+</style>
+
+<style lang="scss">
+// fix css style bug in open el-dialog
+.el-popup-parent--hidden {
+  .fixed-header {
+    padding-right: 15px;
+  }
+}
+</style>
