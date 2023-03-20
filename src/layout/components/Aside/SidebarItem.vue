@@ -3,8 +3,6 @@
     <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
       <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
-          <!-- <i class="el-icon-menu" /> -->
-          <!-- <span slot="title">导航二</span> -->
           <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="(onlyOneChild.meta.title)" />
         </el-menu-item>
       </app-link>
@@ -19,9 +17,9 @@
         :key="child.path"
         :is-nest="true"
         :item="child"
-        :base-path="resolvePath(child.path,'name')"
-        class="nest-menu"
+        :base-path="resolvePath(child.path)"
       />
+        <!-- class="nest-menu" -->
     </el-submenu>
   </div>
 </template>
@@ -61,7 +59,7 @@ export default {
   },
   methods: {
     hasOneShowingChild(children = [], parent) {
-      console.log('children', children)
+      // console.log('children', children)
       const showingChildren = children.filter(item => {
         if (item.hidden) {
           return false
@@ -71,7 +69,7 @@ export default {
           return true
         }
       })
-      console.log('showingChildren', showingChildren)
+      // console.log('this.onlyOneChild', this.onlyOneChild)
       // When there is only one child router, the child router is displayed by default
       if (showingChildren.length === 1) {
         return true
@@ -87,10 +85,8 @@ export default {
 
       return false
     },
-    resolvePath(routePath, name) {
-      if (name === 'name') {
-        console.log('routePath', routePath)
-      }
+    resolvePath(routePath) {
+      
       if (isExternal(routePath)) {
         return routePath
       }
@@ -104,3 +100,4 @@ export default {
   }
 }
 </script>
+ 

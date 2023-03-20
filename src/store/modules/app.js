@@ -2,9 +2,16 @@
 const app = {
   namespaced: true,
   state: {
-    count: 2
+    count: 2,
+    sidebar:{
+      openBar:true
+    }
   },
   mutations: {
+    SET_SIDEBAR(state) {
+      state.sidebar.openBar = !state.sidebar.openBar
+      console.log('SET_SIDEBAR',state.openBar);
+    },
     INCREMENT (state) {
       state.count++
     },
@@ -19,6 +26,10 @@ const app = {
     }
   },
   actions: {
+    sidebar({commit}){
+      // return 
+      commit('SET_SIDEBAR')
+    }
     // remove token
     // resetToken ({ commit }) {
     //   return new Promise(resolve => {

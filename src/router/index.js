@@ -6,7 +6,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import charts from './modules/charts'
-// import components from './modules/components'
+import components from './modules/components'
 
 
 import Layout from '@/layout'
@@ -15,37 +15,23 @@ import Layout from '@/layout'
 // 也可以从其他文件导入
 // import Home from '../views/Home.vue'
 // import note from '@/views/note/note1'
-// 应用路有插件
+
+// 应用路由
 Vue.use(VueRouter)
 
 
 // 2. 定义一些路由
 // 每个路由都需要映射到一个组件。
 // 我们后面再讨论嵌套路由。
-const layout = function (meta = {}, path = '') {
-  return {
-    path: path,
-    // component: Layout,
-    meta: {
-      requiresAuth: true,
-      ...meta
-    }
-  }
-}
+
 export const constantRoutes = [
   {
-    ...layout(
-      {
-        meta: {
-          title: '工作台',
-          // requiresAuth: true,
-          permissionList: ['crm', 'leads', 'assigned']
-        }
-      },
-      '/task',
-      ),
-      naem:'测试一',
+    meta: {
+      title: '工作台',
+      icon:'hxicon-unsettle'
+    },
     redirect: '/task/home',
+    path: '/task',
     component: Layout,
     children: [
       {
@@ -54,7 +40,6 @@ export const constantRoutes = [
         name: 'visit',
         meta: {
           title: 'visit',
-          roles: ['admin'] // or you can only set roles in sub nav
         }
       },
       {
@@ -63,7 +48,6 @@ export const constantRoutes = [
         name: 'home',
         meta: {
           title: 'home',
-          roles: ['admin'] // or you can only set roles in sub nav
         }
       }
     ]
@@ -73,12 +57,9 @@ export const constantRoutes = [
     path: '/permission',
     component: Layout,
     redirect: '/permission/page',
-    alwaysShow: true, // will always show the root menu
-    name: '测试二',
     meta: {
-      title: 'permission',
-      icon: 'lock',
-      roles: ['admin', 'editor'] // you can set roles in root nav
+      title: '测试二',
+      icon:'hxicon-unsettle'
     },
     children: [
       {
@@ -87,7 +68,6 @@ export const constantRoutes = [
         name: 'PagePermission',
         meta: {
           title: 'pagePermission',
-          roles: ['admin'] // or you can only set roles in sub nav
         }
       },
       {
@@ -96,7 +76,6 @@ export const constantRoutes = [
         name: 'DirectivePermission',
         meta: {
           title: 'directivePermission'
-          // if do not set roles, means: this page does not require permission
         }
       },
       {
@@ -105,7 +84,6 @@ export const constantRoutes = [
         name: 'RolePermission',
         meta: {
           title: 'rolePermission',
-          roles: ['admin']
         }
       }
     ]
@@ -125,7 +103,7 @@ export const constantRoutes = [
 ]
 
 export const asyncRouters = [
-  // ...components,
+  ...components,
   ...charts
 ]
 
@@ -139,7 +117,7 @@ const createRouter = () => new VueRouter({
 const router = createRouter()
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
-export function resetRouter() {
+export function resetRouter () {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
 }
@@ -155,7 +133,7 @@ VueRouter.prototype.push = function push (location, onResolve, onReject) {
 
 //方案二
 // 删除 node_modules ，到 package.json 中将 vue-router 改为 3.0.7 ，重新 npm i (未测试)
- 
+
 
 // 4.暴露router实例
 export default router

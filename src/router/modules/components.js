@@ -14,39 +14,35 @@ const components = [
   {
     ...layout(
       {
-        meta: {
-          title: '工作台',
-          // requiresAuth: true,
-          permissionList: ['crm', 'leads', 'assigned']
+          icon:'hxicon-unsettle',
+          title:'测试',
+          permissionList: [['crm','auditReport']]
+      },
+      '/component',
+      ),
+      redirect:'/component/keyboard',
+      children: [
+        {
+          path: 'keyboard',
+          component: () => import('@/views/charts/keyboard'),
+          name: 'keyboard',
+          meta: { 
+          title: 'keyboardChart',
+          requiresAuth:true,
+          permissions:['crm','auditReport','projectFollow']
         }
-      },
-      '/task',
-    ),
-    component: () => import('@/views/work/visit'),
-    hidden:true,
-  },
-  {
-    path: '/meuns',
-    premissionList: [],
-    component: () => import('@/views/menu/index'),
-    title: '菜单测试',
-    children: [
-      {
-        path: 'keyboard',
-        component: () => import('@/views/charts/keyboard'),
-        name: 'keyboard',
-        meta: { title: 'keyboardChart', noCache: true }
-      },
-      {
-        path: 'lines',
-        component: () => import('@/views/charts/line'),
-        name: 'lines',
-        meta: { title: 'lineChart', noCache: true }
-      },
-    ]
+        },
+        {
+          path: 'lines',
+          component: () => import('@/views/charts/line'),
+          name: 'lines',
+          meta: { title: 'lineChart',
+          requiresAuth:true,
+          permissions:['crm','auditReport','projectRecommend']}
+        },
+      ]
 
   }
-
 ]
 
 export default components

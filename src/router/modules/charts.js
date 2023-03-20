@@ -16,8 +16,10 @@ const charts =
     {
       ...layout(
         {
-          title:'echarts',
-          permissionList:[['crm','appToBeSet']]
+          title:'测试line',
+          permissionList:[['crm','appToBeSet']],
+      icon:'hxicon-unsettle'
+
         },
         '/echart'
       ),
@@ -28,7 +30,7 @@ const charts =
         name:'测试三',
         component: () => import('@/views/charts/echart-line/index.vue'),
         meta:{
-          title: 'line',
+          title: '测试line',
           requiresAuth: true,
           permissions: ['crm', 'appToBeSet', 'appToBeSetList']
         }
@@ -38,25 +40,24 @@ const charts =
   {
     ...layout(
       {
-        title:'components',
+        icon:'hxicon-unsettle',
         permissionList:[['crm','customer']]
       },
       '/components'
     ),
-  redirect:'/components/work',
-  children: [
-    {
-      path: 'work',
-      name:'测试四',
-
-      component: () => import('@/views/components-dome/work.vue'),
-      meta:{
-        title: 'work',
-        requiresAuth: true,
-        permissions: ['crm', 'customer', 'conCustomer']
-      }
-    }
-  ]
+      redirect:'/components/work',
+      children: [
+        {
+          path: 'work',
+          name:'测试四',
+          component: () => import('@/views/components-dome/work.vue'),
+          meta:{
+            title: 'work',
+            requiresAuth: true,
+            permissions: ['crm', 'customer', 'conCustomer']
+          }
+        }
+      ]
 }
 
   ]

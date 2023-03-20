@@ -9,7 +9,7 @@ import { isExternal } from '@/utils/validate'
 
 export default {
   props: {
-    to: {
+    to: { // path
       type: String,
       required: true
     }
@@ -28,7 +28,7 @@ export default {
   methods: {
     linkProps(to) {
       if (this.isExternal) {
-        return {
+        return { // http链接
           href: to,
           target: '_blank',
           rel: 'noopener'

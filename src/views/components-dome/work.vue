@@ -1,26 +1,69 @@
-<!--
- * @Author: chenlijie chen.lijie@hxss.com.cn
- * @Date: 2023-03-03 09:10:40
- * @LastEditors: chenlijie chen.lijie@hxss.com.cn
- * @LastEditTime: 2023-03-03 09:20:39
- * @FilePath: \v2-dome\src\views\components-dome\work.vue
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
--->
 <template>
-  <div class="work">work</div>
+  <div class="">
+
+
+  <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+  <el-radio-button :label="false">展开</el-radio-button>
+  <el-radio-button :label="true">收起</el-radio-button>
+</el-radio-group>
+<el-menu default-active="1-4-1" class="el-menu-vertical-demo"
+ :background-color="variables.menuBg"
+      :text-color="variables.menuText" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+  <el-submenu index="1">
+    <template slot="title">
+      <i class="el-icon-location"></i>
+      <span slot="title">导航一</span>
+    </template>
+    <el-submenu index="1-4">
+      <span slot="title">选项4</span>
+      <el-menu-item index="1-4-1">选项1</el-menu-item>
+    </el-submenu>
+  </el-submenu>
+  <el-menu-item index="2">
+    <i class="el-icon-menu"></i>
+    <span slot="title">导航二</span>
+  </el-menu-item>
+  <el-menu-item index="3" disabled>
+    <i class="el-icon-document"></i>
+    <span slot="title">导航三</span>
+  </el-menu-item>
+  <el-menu-item index="4">
+    <i class="el-icon-setting"></i>
+    <span slot="title">导航四</span>
+  </el-menu-item>
+</el-menu>
+
+   </div>
 </template>
 
-<script>
-export default {
-  components: {},
-  data () {
-    return {
-
-    }
-  },
-  methods: {},
-  created () {}
-}
-</script>
-<style lang="scss" scoped>
+<style>
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  }
 </style>
+
+<script>
+import variables from '@/styles/variables.scss'
+
+  export default {
+    data() {
+      return {
+        isCollapse: true
+      };
+    },
+    computed:{
+      variables() {
+      return variables
+    },
+    },
+    methods: {
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      }
+    }
+  }
+</script>

@@ -1,24 +1,21 @@
 <template>
-  <el-container class="h-100">
-    <el-aside width="210px" class="aside">
-      <Aside class="sidebar-container"></Aside>
-    </el-aside>
-    <el-container>
-      <el-header height="60px">
+  <div :class="classObj" class="app-wrapper">
+    <Aside class="sidebar-container"></Aside>
+    <div :class="{hasTagsView:needTagsView}" class="main-container">
+      <div :class="{'fixed-header':fixedHeader}">
         <Navbar></Navbar>
-      </el-header>
-      <el-main>
-         <AppMain></AppMain>
-      </el-main>
-    </el-container>
-  </el-container>
+      </div>
+      <AppMain></AppMain>
+    </div>
+  </div>
 </template>
 
 <script>
 import Aside from './components/Aside'
 import Navbar from './components/Navbar'
 import { AppMain } from './components'
- 
+import { mapState } from 'vuex'
+
 export default {
   name: 'layout',
   components: {
@@ -27,7 +24,20 @@ export default {
     AppMain
   },
   data() {
-    return {}
+    return {
+      fixedHeader:true
+    }
+  },
+  computed: {
+    ...mapState({
+      sidebar: state => state.app.sidebar,
+    }),
+    classObj() {
+      return {
+        hideSidebar: this.sidebar.openBar,
+        openSidebar: !this.sidebar.openBar,
+      }
+    }
   },
   methods: {
 
@@ -36,4 +46,9 @@ export default {
   created() {}
 }
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.app-wrapper {
+  width: 100%;
+  height: 100%;
+}
+</style>

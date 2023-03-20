@@ -7,7 +7,8 @@ const getters = {
   allAuth : state => state.user.allAuth,
   crm : state => state.user.crm,
   addRouters : state => state.permission.addRouters,
-  routers : state => state.permission.routers
+  routers : state => state.permission.routers,
+  sidebar : state => state.app.sidebar
 }
 
 export default getters
